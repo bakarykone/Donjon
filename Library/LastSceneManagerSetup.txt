@@ -1,0 +1,5 @@
+sceneSetups:
+- path: Assets/Simple Modular Dungeon/Scenes/Modular Dungeon.unity
+  isLoaded: 1
+  isActive: 1
+  isSubScene: 0
