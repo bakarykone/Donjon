@@ -31,6 +31,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "sprint",
+                    "type": "Button",
+                    "id": "92051905-39ae-4703-bf8b-c369ee2fd47a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -168,17 +177,6 @@
                 },
                 {
                     "name": "",
-                    "id": "78fe954b-382e-4751-9100-9434628e6b07",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Fire",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "e09fe3b9-988d-447c-9f95-fdbfffcfb305",
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
@@ -196,6 +194,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c3958702-6e95-466e-8ad2-0aa962e83de3",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "sprint",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class animationStateController : MonoBehaviour
 {
@@ -10,6 +11,18 @@ public class animationStateController : MonoBehaviour
     int isWalkingLeftHash;
     int isWalkingRightHash;
     int isWalkingBackwardHash;
+
+    public float currentSpeed;
+    public float runSpeed;
+    public float walkSpeed;
+
+    public InputActionReference fireAction;
+    public InputActionReference horizontalAction;
+    public InputActionReference verticalAction;
+    public InputActionReference SprintAction;
+
+    public GameObject bulletPrefab;
+    public GameObject bulletSpawnPoint;
 
     // Start is called before the first frame update
     void Start()
@@ -27,84 +40,48 @@ public class animationStateController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bool isRunning = animator.GetBool(isRunningHash);
-        bool isWalkingForward = animator.GetBool(isWalkingForwardHash);
-        bool isWalkingLeft = animator.GetBool(isWalkingLeftHash);
-        bool isWalkingRight = animator.GetBool(isWalkingRightHash);
-        bool isWalkingBackward = animator.GetBool(isWalkingBackwardHash);
-        bool forwardPressed = Input.GetKey("w");
-        bool runPressed = Input.GetKey("left shift");
-        bool leftPressed = Input.GetKey("a");
-        bool rightPressed = Input.GetKey("d");
-        bool backwardPressed = Input.GetKey("s");
 
-    //FORWARD
-        //if player presses W key
-        if (!isWalkingForward && forwardPressed) 
-        {
-            //then set the walking boolean to be true
-            animator.SetBool(isWalkingForwardHash, true);
-        }
-        // if player is not pressing W key
-        if (isWalkingForward && !forwardPressed)
-        {
-            //then set the isWalking boolean to be false
-            animator.SetBool(isWalkingForwardHash, false);
-        }
+        Vector3 movement = Vector3.zero; // Initialize movement vector to zero
 
-        //if player is walking and not running and presses left shift
-        if (!isRunning && (forwardPressed && runPressed))
+        // Check input actions
+        bool forwardPressed = verticalAction.action.ReadValue<float>() > 0;
+        bool runPressed = SprintAction.action.IsInProgress();
+        bool leftPressed = horizontalAction.action.ReadValue<float>() < 0;
+        bool rightPressed = horizontalAction.action.ReadValue<float>() > 0;
+        bool backwardPressed = verticalAction.action.ReadValue<float>() < 0;
+
+        // Update movement vector based on input
+        if (forwardPressed)
         {
-            //then set the isRunning bool to be true
-            animator.SetBool(isRunningHash, true);
+            movement += Vector3.forward * (runPressed ? runSpeed : walkSpeed) * Time.deltaTime;
         }
-        //if player is running and stops running or stops walking
-        if (isRunning && (!forwardPressed && runPressed))
+        if (backwardPressed)
         {
-            //then set the isRunning boolean to be false
-            animator.SetBool(isRunningHash, false);
+            movement += Vector3.back * walkSpeed * Time.deltaTime;
+        }
+        if (leftPressed)
+        {
+            movement += Vector3.left * walkSpeed * Time.deltaTime;
+        }
+        if (rightPressed)
+        {
+            movement += Vector3.right * walkSpeed * Time.deltaTime;
         }
 
-    //LEFT
-        //if player presses A key
-        if (!isWalkingLeft && leftPressed)
-        {
-            //then set the walking boolean to be true
-            animator.SetBool(isWalkingLeftHash, true);
-        }
-        // if player is not pressing A key
-        if (isWalkingLeft && !leftPressed)
-        {
-            //then set the isWalking boolean to be false
-            animator.SetBool(isWalkingLeftHash, false);
-        }
+        // Translate the object based on the calculated movement vector
+        transform.Translate(movement);
 
-    //RIGHT
-        //if player presses D key
-        if (!isWalkingRight && rightPressed)
-        {
-            //then set the walking boolean to be true
-            animator.SetBool(isWalkingRightHash, true);
-        }
-        // if player is not pressing D key
-        if (isWalkingRight && !rightPressed)
-        {
-            //then set the isWalking boolean to be false
-            animator.SetBool(isWalkingRightHash, false);
-        }
+        // Update animator parameters
+        animator.SetBool(isWalkingForwardHash, forwardPressed);
+        animator.SetBool(isRunningHash, runPressed && forwardPressed);
+        animator.SetBool(isWalkingLeftHash, leftPressed);
+        animator.SetBool(isWalkingRightHash, rightPressed);
+        animator.SetBool(isWalkingBackwardHash, backwardPressed);
 
-    //BACKWARD
-        if (!isWalkingBackward && backwardPressed)
+        // Fire action
+        if (fireAction.action.triggered)
         {
-            //then set the walking boolean to be true
-            animator.SetBool(isWalkingBackwardHash, true);
+            Instantiate(bulletPrefab, bulletSpawnPoint.transform.position, transform.rotation);
         }
-        // if player is not pressing W key
-        if (isWalkingBackward && !forwardPressed)
-        {
-            //then set the isWalking boolean to be false
-            animator.SetBool(isWalkingBackwardHash, false);
-        }
-
     }
 }
