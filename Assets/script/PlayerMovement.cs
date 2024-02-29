@@ -17,7 +17,7 @@ public class player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        rb = this.GetComponent<Rigidbody>();
     }
 
     void RotateToward(Vector3 pos)
