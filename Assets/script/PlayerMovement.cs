@@ -6,12 +6,7 @@ using UnityEngine.InputSystem;
 public class player : MonoBehaviour
 {
     public float speed;
-    /*
-    public InputActionReference forwardAction;
-    public InputActionReference rightAction;
-    public InputActionReference leftAction;
-    public InputActionReference downAction;
-    */
+
     public InputActionReference fireAction;
     public InputActionReference horizontalAction;
     public InputActionReference verticalAction;
@@ -22,7 +17,7 @@ public class player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb = this.GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
     }
 
     void RotateToward(Vector3 pos)
@@ -61,19 +56,5 @@ public class player : MonoBehaviour
         {
             Instantiate(bulletPrefab, bulletSpawnPoint.transform.position, this.transform.rotation);
         }
-        /*
-        if(downAction.action.IsInProgress())
-        {
-            this.transform.position += Vector3.back * speed * Time.deltaTime;
-        }
-        if (leftAction.action.IsInProgress())
-        {
-            this.transform.position += Vector3.left * speed * Time.deltaTime;
-        }
-        if (rightAction.action.IsInProgress())
-        {
-            this.transform.position += Vector3.right * speed * Time.deltaTime;
-        }
-        */
     }
 }
