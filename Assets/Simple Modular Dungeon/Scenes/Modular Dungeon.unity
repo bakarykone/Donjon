@@ -14467,6 +14467,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
+--- !u!114 &1743098633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743098622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd4cbc4fcd4d38f4e8d60cdb7c561c0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1745084536
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19443,6 +19455,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5551015330569399724, guid: 4de9940bb6836b34980ece4f26d91214, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5551015330569399724, guid: 4de9940bb6836b34980ece4f26d91214, type: 3}
       propertyPath: fireAction
       value: 
       objectReference: {fileID: 176373055303660599, guid: 9bff0ebe3039684478fa899d7ab1b77b, type: 3}
@@ -19519,6 +19535,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 9008489335673036340, guid: 4de9940bb6836b34980ece4f26d91214, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1743098625}
+    - targetCorrespondingSourceObject: {fileID: 9008489335673036340, guid: 4de9940bb6836b34980ece4f26d91214, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1743098633}
   m_SourcePrefab: {fileID: 100100000, guid: 4de9940bb6836b34980ece4f26d91214, type: 3}
 --- !u!1001 &5094658543063489343
 PrefabInstance:
