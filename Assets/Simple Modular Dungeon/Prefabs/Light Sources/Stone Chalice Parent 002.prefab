@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5335554258312166605}
   m_Layer: 0
   m_Name: Fire_Chalice_Particle_Parent
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19496,7 +19496,7 @@ GameObject:
   - component: {fileID: 9146516284925084803}
   m_Layer: 0
   m_Name: Stone Fire Chalice Variation 002
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 1117621174034032877}
   m_Layer: 0
   m_Name: Torch Variation 002
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -329,6 +329,10 @@ PrefabInstance:
     - target: {fileID: 7183553855393488263, guid: f62b31a3464faf14f934e38f9ee55eba, type: 3}
       propertyPath: m_Name
       value: Fire_Torch_Parent
+      objectReference: {fileID: 0}
+    - target: {fileID: 7183553855393488263, guid: f62b31a3464faf14f934e38f9ee55eba, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 7827578479462108488, guid: f62b31a3464faf14f934e38f9ee55eba, type: 3}
       propertyPath: InitialModule.startSize.scalar

@@ -19,7 +19,7 @@ public class bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        print(collision.gameObject.tag);
+        //print(collision.gameObject.tag);
         if (collision.gameObject.tag == "Wall")
         {
             Destroy(this.gameObject);//detruire la balle

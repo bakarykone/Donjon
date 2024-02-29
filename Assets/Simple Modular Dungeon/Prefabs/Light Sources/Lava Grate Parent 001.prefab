@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 7461094628979548125}
   m_Layer: 0
   m_Name: Lava Grate Variation 001
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
