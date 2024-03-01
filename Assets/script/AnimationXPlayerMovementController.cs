@@ -11,20 +11,23 @@ public class AnimationXPlayerController : MonoBehaviour
     int isWalkingLeftHash;
     int isWalkingRightHash;
     int isWalkingBackwardHash;
+    int isJumpingHash;
 
-    public float currentSpeed;
     public float runSpeed;
     public float walkSpeed;
+    public float jumpForce;
 
     public InputActionReference fireAction;
     public InputActionReference horizontalAction;
     public InputActionReference verticalAction;
-    public InputActionReference SprintAction;
+    public InputActionReference sprintAction;
+    public InputActionReference jumpAction;
 
     public GameObject bulletPrefab;
     public GameObject bulletSpawnPoint;
 
     private Rigidbody rb;
+
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +42,7 @@ public class AnimationXPlayerController : MonoBehaviour
         isWalkingLeftHash = Animator.StringToHash("isWalkingLeft");
         isWalkingRightHash = Animator.StringToHash("isWalkingRight");
         isWalkingBackwardHash = Animator.StringToHash("isWalkingBackward");
+        isJumpingHash = Animator.StringToHash("isJumping");
     }
 
     void RotateToward(Vector3 pos)
@@ -65,10 +69,11 @@ public class AnimationXPlayerController : MonoBehaviour
 
         // Check input actions
         bool forwardPressed = verticalAction.action.ReadValue<float>() > 0;
-        bool runPressed = SprintAction.action.IsInProgress();
+        bool runPressed = sprintAction.action.IsInProgress();
         bool leftPressed = horizontalAction.action.ReadValue<float>() < 0;
         bool rightPressed = horizontalAction.action.ReadValue<float>() > 0;
         bool backwardPressed = verticalAction.action.ReadValue<float>() < 0;
+        bool jumpPressed = jumpAction.action.triggered;
 
         // Update movement vector based on input
         if (forwardPressed)
@@ -77,15 +82,15 @@ public class AnimationXPlayerController : MonoBehaviour
         }
         if (backwardPressed)
         {
-            movement += Vector3.back * walkSpeed * Time.deltaTime;
+            movement += Vector3.back * (runPressed ? runSpeed : walkSpeed) * Time.deltaTime;
         }
         if (leftPressed)
         {
-            movement += Vector3.left * walkSpeed * Time.deltaTime;
+            movement += Vector3.left * (runPressed ? runSpeed : walkSpeed) * Time.deltaTime;
         }
         if (rightPressed)
         {
-            movement += Vector3.right * walkSpeed * Time.deltaTime;
+            movement += Vector3.right * (runPressed ? runSpeed : walkSpeed) * Time.deltaTime;
         }
 
         // Translate the object based on the calculated movement vector
@@ -99,11 +104,20 @@ public class AnimationXPlayerController : MonoBehaviour
         animator.SetBool(isWalkingLeftHash, leftPressed);
         animator.SetBool(isWalkingRightHash, rightPressed);
         animator.SetBool(isWalkingBackwardHash, backwardPressed);
+        animator.SetBool(isJumpingHash, jumpPressed);
 
         // Fire action
         if (fireAction.action.triggered)
         {
             Instantiate(bulletPrefab, bulletSpawnPoint.transform.position, transform.rotation);
         }
+
+        // Jump action
+        if (jumpPressed)
+        {
+
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        }
     }
+
 }
