@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3731193, g: 0.3807401, b: 0.358727, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -15282,8 +15282,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentSpeed: 0
-  runSpeed: 10
-  walkSpeed: 5
+  runSpeed: 20
+  walkSpeed: 10
   fireAction: {fileID: 176373055303660599, guid: 9bff0ebe3039684478fa899d7ab1b77b, type: 3}
   horizontalAction: {fileID: -6788261252924717950, guid: 9bff0ebe3039684478fa899d7ab1b77b, type: 3}
   verticalAction: {fileID: -6656227318533429616, guid: 9bff0ebe3039684478fa899d7ab1b77b, type: 3}
@@ -20461,7 +20461,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5551015330569399724, guid: 4de9940bb6836b34980ece4f26d91214, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5551015330569399724, guid: 4de9940bb6836b34980ece4f26d91214, type: 3}
       propertyPath: fireAction

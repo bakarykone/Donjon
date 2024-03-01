@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class animationStateController : MonoBehaviour
+public class AnimationXPlayerController : MonoBehaviour
 {
     Animator animator;
     int isWalkingForwardHash;
@@ -24,9 +24,13 @@ public class animationStateController : MonoBehaviour
     public GameObject bulletPrefab;
     public GameObject bulletSpawnPoint;
 
+    private Rigidbody rb;
+
     // Start is called before the first frame update
     void Start()
     {
+        rb = this.GetComponent<Rigidbody>();
+
         animator = GetComponent<Animator>();
 
         //increase performance
@@ -37,11 +41,27 @@ public class animationStateController : MonoBehaviour
         isWalkingBackwardHash = Animator.StringToHash("isWalkingBackward");
     }
 
+    void RotateToward(Vector3 pos)
+    {
+        pos = new Vector3(pos.x, this.transform.position.y, pos.z);
+        this.transform.LookAt(pos);
+    }
+
     // Update is called once per frame
     void Update()
     {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
 
-        Vector3 movement = Vector3.zero; // Initialize movement vector to zero
+        Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red);
+
+        if ((Physics.Raycast(ray, out hit, 100f, 1 << 3)))
+        {
+            print("Ray hit at : " + hit.point);
+            RotateToward(hit.point);
+        }
+
+        Vector3 movement = this.transform.position; // Initialize movement vector to zero
 
         // Check input actions
         bool forwardPressed = verticalAction.action.ReadValue<float>() > 0;
@@ -69,7 +89,9 @@ public class animationStateController : MonoBehaviour
         }
 
         // Translate the object based on the calculated movement vector
-        transform.Translate(movement);
+        //transform.Translate(movement);
+
+        rb.MovePosition(movement);
 
         // Update animator parameters
         animator.SetBool(isWalkingForwardHash, forwardPressed);
