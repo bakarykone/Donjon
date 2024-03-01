@@ -16,6 +16,9 @@ public class AnimationXPlayerController : MonoBehaviour
     public float runSpeed;
     public float walkSpeed;
     public float jumpForce;
+    public float jumpCooldown = 0.5f; // Temps de recharge entre les sauts
+    private bool canJump = true;
+    private bool hasJumped = false;
 
     public InputActionReference fireAction;
     public InputActionReference horizontalAction;
@@ -113,10 +116,27 @@ public class AnimationXPlayerController : MonoBehaviour
         }
 
         // Jump action
-        if (jumpPressed)
+        if (canJump && jumpPressed)
         {
-
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            if (!hasJumped)
+            {
+                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                hasJumped = true;
+            }
+            else
+            {
+                rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                canJump = false;
+            }
+        }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            hasJumped = false;
+            canJump = true;
         }
     }
 
